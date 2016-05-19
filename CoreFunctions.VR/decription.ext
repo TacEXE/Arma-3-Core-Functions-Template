@@ -1,0 +1,244 @@
+/*---------------------------------------------------------------------------
+TCSL (2016) - description.ext with comments
+https://community.bistudio.com/wiki/Description.ext
+---------------------------------------------------------------------------*/
+
+class Header
+ {
+ 	gameType = COOP;											// game type DM, CTF, COOP, SC
+ 	minPlayers = 1;												// min # of players the mission supports.
+ 	maxPlayers = 10;											// max # of players the mission supports.
+ 	playerCountMultipleOf = 1;									// OFP:Elite option. COOP = 1, Balanced = 2
+ };
+
+author = "TacEXE";												// appears on loading screen.
+OnLoadName = "Core Functions";									// mission name that appears on loading screen.
+OnLoadMission = "All you need to create your own missions.";	// short description of the mission. appears on loading screen.
+loadScreen = "img\loadScreen.paa";								// and a nice image for your loading screen. can be placed in a subfolder.
+
+respawn = 3;													// 0 or NONE, 1 or BIRD, 2 or INSTANT, 3 or BASE, 4 or GROUP, 5 or SIDE.
+respawnDelay = 15;												// respawn timer in seconds.
+respawnVehicleDelay = 300;										// respawn timer in seconds.
+respawnDialog = 0;												// show the respawn dialog 0 or 1.
+
+joinUnassigned = 1;												// Set to 0 to set him autoassigned to the side with least players.
+disabledAI = 1;													// when 1, removes all playable units which do not have a human player. (MP)
+
+briefing = 0;													// briefing will still be displayed untill all clients are connected and done loading.
+debriefing = 0;													// defines if the debriefing is shown or not at the end of the mission.
+aiKills = 0;													// enables/disables scorelist for AI players.
+
+showGPS = 1;													// enables/disables the GPS. In ArmA 1.04 toggle this option to disable the mini map attached to the GPS.
+showCompass = 1;												// defines if the compass is visible.
+showMap = 1;													// defines if the map is shown after the mission starts.
+showNotePad = 0;												// in ArmA, defines if the NotePad is shown after the mission starts.
+showWatch = 1;													// defines if the watch is visible.
+
+scriptedPlayer = 1;												// when enabled, game no longer shows "No player select" error message.
+
+disableChannels[]={0,1,2,6};									// disable global (0), side (1), command (2) and system (6) chat. 3 group, 4 vehicle and 5 direct.
+
+enableItemsDropping = 0;		// disable/enable dropping items while swimming.
+
+
+/**
+ * Sounds
+ *
+ * General sounds that can be used for dialog, voiceovers in the briefing etc.
+ *
+ * Example:
+ * class cfgSounds
+ * {
+ * 		sounds[] = {};
+ *		class wolf1
+ *		{
+ *			// how the sound is referred to in the editor (e.g. trigger effects)
+ * 			name = "my_wolf_sound";
+ *			// filename, volume, pitch
+ *			sound[] = {"fx\wolf1.ogg", 1, 1};
+ *			titles[] = {};
+ *		};
+ * };
+ *
+ * Use in mission:
+ * playSound "wolf1";   // use the class name!
+ * player say ["wolf1", 100];
+ *
+ * Tutorial:
+ * http://ofp.toadlife.net/downloads/tutorials/tutorial_sound/tutorial_sound.html
+ */
+
+/**
+ * Radio sentences
+ *
+ * Example:
+ * class CfgRadio
+ * {
+ *		sounds[] = {};
+ * 		class RadioMsg1
+ *		{
+ *			name = "";
+ *			sound[] = {"\sound\filename1.ogg", db-100, 1.0};
+ *			title = "I am ready for your orders.";
+ *		};
+ *		class RadioMsg2
+ *		{
+ *			name = "";
+ *			sound[] = {"\sound\filename2", db-100, 1.0}; // .wss implied
+ *			title = {$STR_RADIO_2};
+ *		};
+ * };
+ *
+ * Note that the location of the sound file is relative to the mission.
+ *
+ * Use in missions:
+ * unit sideRadio RadioMsg2
+ */
+
+/**
+ * cfgMusic
+ *
+ * Example:
+ * class CfgMusic
+ * {
+ *		tracks[]={};
+ *
+ *		class MarsIntro
+ *		{
+ *			name = "";
+ *			sound[] = {"\music\filename.ogg", db+0, 1.0};
+ *		};
+ * 		class Ludwig9
+ *		{
+ *			name = "";
+ *			sound[] = {"\music\filename.ogg", db+10, 1.0};
+ *		};
+ * };
+ *
+ * Name can be left blank as in the examples above.
+ * Only specify a name if you wish to access these sounds
+ * via the environment options of a trigger.
+ *
+ * Title is the text string that will be displayed on the
+ * screen when the sound file is played. See also Stringtable.csv
+ * http://community.bistudio.com/wiki/Stringtable.csv
+ * 
+ * Setting volume (db) of music far from zero will disable
+ * fadeMusic command. Optimal values are from -10 to 10.
+ *
+ * Use in missions:
+ * playMusic  "MarsIntro"
+ */
+
+/**
+ * cfgIdentities
+ * 
+ * Define the identities of individual units, you can specify
+ * the face, type of glasses worn, voice, tone of voice and name
+ * of an identity. You then give a specific unit this identity
+ * by using the command setIdentity in the mission.
+ *
+ * class CfgIdentities
+ * {
+ *		class John_Doe
+ *		{
+ *			name="John Bartholemew Doe";
+ *			face="Face20";
+ *			glasses="None";
+ *			speaker="Dan";
+ *			pitch=1.1;
+ *		};
+ * };
+ *
+ * See Category:CfgIdentities for valid options for:
+ * face, glasses, speaker etc.
+ * http://community.bistudio.com/wiki/Category:CfgIdentities
+ */
+
+
+/**
+ * rscTitles
+ *
+ * Defines custom UI displays.
+ * To show such displays, use cutRsc or titleRsc.
+ */
+
+/**
+ * Weapons
+ *
+ * Set weapons available to players during the briefing.
+ * 
+ * Example:
+ * class Weapons 
+ * {
+ * 		class AK74 {count = 8;};
+ * 		class RPG7V {count = 2;};
+ * 		class Binocular {count = 2;};
+ * };
+ */
+
+/**
+ * Magazines
+ *
+ * Set magazines available to players during the briefing.
+ *
+ * Example:
+ * class Magazines 
+ * {
+ * 		class 30Rnd_545x39_AK {count = 32;};
+ * 		class PG7V {count = 6;};
+ * 		class HandGrenade {count = 16;};
+ * };
+ */
+
+/**
+ * Backpacks
+ * 
+ * Set backpacks available to players during the briefing.
+ *
+ * Example:
+ * class Backpacks 
+ * {
+ *		class US_Patrol_Pack_EP1 {count = 4;};
+ *		class US_Assault_Pack_EP1 {count = 4;};
+ * };
+ */
+
+/**
+ * Allows equipment transferred from one campaign mission
+ * to the next to be available during the briefing in the gear menu.
+ *
+ * See also Command Group: Weapon Pool.
+ * http://community.bistudio.com/wiki/Category:Command_Group:_Weapon_Pool
+ */
+
+// weaponPool = 1;
+
+/**
+ * Params
+ *
+ * Advanced multiplayer mission params, replacing obsolete titleParam%.
+ * The array of parameters can be accessed via paramsArray
+ * (Array, paramsArray select 0, etc.)
+ *
+ * Example:
+ * class Params
+ * {
+ * 		class Score
+ * 		{
+ *			title = "$STR_mp_param_score";
+ * 			values[] = {10,200};
+ * 			texts[] = {"10","200"};
+ *			default = 10;
+ * 		};
+ * 		class Duration
+ * 		{
+ *			title = "$STR_mp_param_duration";
+ *			values[] = {1,2};
+ *			texts[] = {"one hour","two hours"};
+ *			default = 1;
+ *		};
+ *		etc. .....
+ * }
+ */
+
